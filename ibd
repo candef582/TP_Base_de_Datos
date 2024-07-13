@@ -1,0 +1,338 @@
+create database tp_Fernandez;
+use tp_Fernandez;
+
+-- CREAR TABLAS
+
+create table Alumno(
+	`idAlumno` INT NOT NULL,
+    `nombre` VARCHAR(45) NOT NULL,
+    `apellido` VARCHAR(45) NOT NULL,
+    `dni` INT NOT NULL,
+	PRIMARY KEY (`idAlumno`),
+    KEY Domicilio_idDomicilio (`idDomicilio`),
+	KEY Carrera_idCarrera (`idCarrera`),
+    KEY Inicio_de_sesion_usuario (`usuario`),
+    KEY Inicio_de_sesion_clave (`clave`),
+    fk_Inscripcion_a_cursada_idcomision INT NOT NULL
+    );
+create table Docente(
+	`idDocente` INT NOT NULL,
+	`nombre` VARCHAR(45) NOT NULL,
+    `apellido` VARCHAR(45) NOT NULL,
+    `dni` INT NOT NULL,
+    primary key(idDocente),
+    KEY Domicilio_idDomicilio (`idDomicilio`),
+    KEY Materia_idMateria (`idMateria`),
+	KEY Inicio_de_sesion_usuario (`usuario`),
+	KEY Inicio_de_sesion_clave (`clave`)
+    );
+create table Domicilio(
+	`idDomicilio` INT NOT NULL,
+	`numero` VARCHAR(45) NULL,
+	`calle` VARCHAR(45) NULL,
+	PRIMARY KEY (`idDomicilio`),
+	KEY Localidad_idLocalidad (`idLocalidad`)
+    );
+create table Localidad(
+	`idLocalidad` INT NOT NULL,
+	`nombre` VARCHAR(45) NOT NULL,
+	PRIMARY KEY (`idLocalidad`),
+	KEY Provincia_idProvincia (`idProvincia`)
+    );
+    create table Provincia(
+	`idProvincia` INT NOT NULL,
+	`nombre` VARCHAR(45) NOT NULL,
+	PRIMARY KEY (`idProvincia`)
+    );
+create table Inscripcion_a_cursada(
+	`idComision` INT NOT NULL,
+    `fecha_y_hora_de_inicio` DATETIME NOT NULL,
+	`aula` VARCHAR(45) NOT NULL,
+	PRIMARY KEY (`idComision`), 
+    KEY Materia_idMateria (`idMateria`),
+    KEY Docente_idDocente (`idDocente`)
+    );
+     create table Inicio_de_sesion (
+	`usuario` VARCHAR(45) NOT NULL, 
+	`clave` VARCHAR(45) NOT NULL,
+	PRIMARY KEY (`usuario`),
+    PRIMARY KEY (`clave`)
+    );
+    create table Carrera(
+	`idCarrera` INT NOT NULL,
+    `nombre` VARCHAR(45) NOT NULL,
+    PRIMARY KEY (`idCarrera`),
+    KEY Departamento_idDepartamento (`idDepartamento`)
+    );
+     create table Departamento(
+    `idDepartamento` INT NOT NULL,
+    `nombre` VARCHAR(45) NOT NULL,
+    PRIMARY KEY (`idDepartamento`)
+	);
+    create table Materia(
+    `idMateria` INT NOT NULL,
+    `nombre` VARCHAR(45) NOT NULL,
+    PRIMARY KEY (`idMateria`),
+    KEY Carrera_idCarrera (`idCarrera`)
+    );
+    
+    
+    -- INSERTAR DATOS EN TABLAS
+    
+     insert into Alumno values (0001, "Candela", "Fernandez", 43405646, 0029, 1122, "DNI43405646", "Hola123");
+ 	 insert into Alumno values (0002, "Lucas", "Gomez", 12345678, 0030, 1133, "DNI12345678", "Hola345");
+     insert into Alumno values (0003, "Matias", "Zanier", 56789123, 0031, 1122, "DNI56789123", "Hola678");
+	 insert into Alumno values (0004, "Maximiliano", "Castellanos", 90123456, 0032, 1144, "DNI90123456", "Hola988");
+     insert into Alumno values (0044, "Miriam", "Rojas", 89432234, 0033, 1155, "DNI89432234", "Hola333");
+ 	 insert into Alumno values (0045, "Pablo", "Gomez", 11233654, 0034, 1166, "DNI11233654", "Hola444");
+     insert into Alumno values (0046, "Ana", "Pascal", 76543345, 0035, 1177, "DNI76543345", "Hola555");
+	 insert into Alumno values (0047, "Dolores", "Sabe", 99432235, 0036, 1188, "DNI99432235", "Hola666");
+     insert into Alumno values (0048, "Rodrigo", "Lopez", 66774321, 0037, 1199, "DNI 66774321", "Hola777");
+     
+     insert into Docente values (0005, "Laura", "Traysse", 32123321, 0020, 5555, "DNI32123321", "Hola178");
+	 insert into Docente values (0006, "Patricia", "Traysse", 45654465, 0021, 6666, "DNI45654465", "Hola456");
+	 insert into Docente values (0007, "Nicolas", "Perez", 98899877, 0022, 7777, "DNI98899877", "Hola789");
+	 insert into Docente values (0008, "Romina", "Mansilla", 56567543, 0023, 5555, "DNI56567543", "Hola901");
+     insert into Docente values (0009, "Agustin", "Gonzalez", 88999234, 0024, 8888, "DNI88999234", "Hola902");
+     insert into Docente values (0010, "Guadalupe", "Fernandez", 77444333, 0025, 9999, "DNI77444333", "Hola903");
+     insert into Docente values (0111, "Analia", "Pereira", 88992342, 0026, 1010, "DNI88992342", "Hola904");
+     insert into Docente values (0112, "Ramon", "Cabrero", 11654377, 0027, 1011, "DNI11654377", "Hola905");
+     insert into Docente values (0113, "Matias", "Diaz", 33224432, 0028, 1012, "DNI33224432", "Hola906");
+     
+     insert into Domicilio values (0020, 1489, "Ituzaingo", 0011);
+	 insert into Domicilio values (0021, 2076, "Oncativo", 0012);
+     insert into Domicilio values (0022, 1815, "Alsina", 0013);
+	 insert into Domicilio values (0023, 4567, "Hirigoyen", 0014);
+     insert into Domicilio values (0024, 2344, "Sarmiento", 0011);
+     insert into Domicilio values (0025, 3452, "29 de Septiembre", 0011);
+     insert into Domicilio values (0026, 8998, "Salta", 0011);
+     insert into Domicilio values (0027, 40, "Lopez y planes", 0011);
+	 insert into Domicilio values (0028, 302, "Cordoba", 0011);
+	 insert into Domicilio values (0029, 222, "9 de Julio", 0011);
+	 insert into Domicilio values (0030, 3211, "Las Piedras", 0011);
+     insert into Domicilio values (0031, 1915, "Tucuman", 0011);
+	 insert into Domicilio values (0032, 2341, "Guido", 0011);
+     insert into Domicilio values (0033, 654, "Pringles", 0011);
+     insert into Domicilio values (0034, 3321, "Juncal", 0011);
+     insert into Domicilio values (0035, 8123, "Basavilbaso", 0011);
+     insert into Domicilio values (0036, 403, "Eva Peron", 0011);
+	 insert into Domicilio values (0037, 3032, "Cordoba", 0011);
+     
+     
+     insert into Localidad values (0011, "Lanus", 0020);
+	 insert into Localidad values (0012, "Avellaneda", 0020);
+	 insert into Localidad values (0013, "Temperley", 0020);
+	 insert into Localidad values (0014, "Lomas de Zamora", 0020);
+     
+     insert into Provincia values (0020, "Buenos Aires");
+     
+	 insert into Inscripcion_a_cursada values (1000,'2024-03-15 09:30:00', "Hernandez 1", 5555, 0005);
+	 insert into Inscripcion_a_cursada values (1001, '2024-03-20 12:00:00', "Manso 6", 6666, 0006);
+	 insert into Inscripcion_a_cursada values (1002,'2024-03-21 18:40:00', "Jauretche 9", 7777, 0007);
+	 insert into Inscripcion_a_cursada values (1003, '2024-03-25 18:00:00', "Ugarte 7", 8888, 0009);
+	 insert into Inscripcion_a_cursada values (1004, '2024-03-28 18:30:00', "Hernandez 9", 9999, 0010);
+     insert into Inscripcion_a_cursada values (1005, '2024-03-30 13:30:00', "Manso 4", 1010, 0111);
+     insert into Inscripcion_a_cursada values (1006, '2024-03-28 16:00:00', "Jauretche 2", 1011, 0112);
+	 insert into Inscripcion_a_cursada values (1006, '2024-03-28 17:00:00', "Ugarte 6", 1012, 0113);
+     insert into Inscripcion_a_cursada values (1007, '2024-03-30 17:30:00', "Hernandez 3", 5555, 0008);
+     
+	 insert into Inicio_de_sesion values ("DNI43405646", "Hola123");
+	 insert into Inicio_de_sesion values ("DNI12345678", "Hola345");
+     insert into Inicio_de_sesion values ("DNI56789123", "Hola678");
+     insert into Inicio_de_sesion values ("DNI90123456", "Hola988");
+     insert into Inicio_de_sesion values ("DNI32123321", "Hola123");
+     insert into Inicio_de_sesion values ("DNI32123321", "Hola178");
+     insert into Inicio_de_sesion values ("DNI45654465", "Hola456");
+     insert into Inicio_de_sesion values ("DNI98899877", "Hola789");
+     insert into Inicio_de_sesion values ("DNI56567543", "Hola901");
+     insert into Inicio_de_sesion values ("DNI88999234", "Hola902");
+     insert into Inicio_de_sesion values ("DNI77444333", "Hola903");
+     insert into Inicio_de_sesion values ("DNI88992342", "Hola904"); 
+     insert into Inicio_de_sesion values ("DNI11654377", "Hola905"); 
+	 insert into Inicio_de_sesion values ("DNI33224432", "Hola906");
+     insert into Inicio_de_sesion values ("DNI89432234", "Hola333");
+     insert into Inicio_de_sesion values ("DNI11233654", "Hola444"); 
+     insert into Inicio_de_sesion values ("DNI76543345", "Hola555"); 
+	 insert into Inicio_de_sesion values ("DNI99432235", "Hola666");
+	 insert into Inicio_de_sesion values ("DNI 66774321", "Hola777");
+     
+     insert into Carrera values (1122, "Sistemas", 1111);
+     insert into Carrera values (1133, "Audiovision", 2222);
+     insert into Carrera values (1144, "Seguridad ciudadana", 3333);
+     insert into Carrera values (1155, "Enfermeria", 4444);
+     insert into Carrera values (1166, "Economia politica", 1111);
+     insert into Carrera values (1177, "Diseño Industrial", 2222);
+	 insert into Carrera values (1188, "Gestion Educativa", 3333);
+     insert into Carrera values (1199, "Trabajo Social", 4444);
+     
+     insert into Departamento values (1111, "Desarrollo Productivo y Tecnológico");
+	 insert into Departamento values (2222, "Humanidades y Artes");
+     insert into Departamento values (3333, "Planificación y Políticas Públicas");
+     insert into Departamento values (4444, "Salud Comunitaria");
+     
+     insert into Materia values (5555, "Programación de Computadoras", 1122);
+     insert into Materia values (6666, "Tecnología de la Imagen", 1133);
+     insert into Materia values (7777, "Paradigmas y Sistemas de Seguridad", 1144);
+     insert into Materia values (8888, "Cultura y Salud", 1155);
+     insert into Materia values (9999, "Sociología", 1166);
+	 insert into Materia values (1010, "Dibujo Técnico", 1177);
+     insert into Materia values (1011, "Teoría curricular", 1188);
+     insert into Materia values (1012, "Trabajo Social I", 1199);
+     
+     
+     -- CONSULTAS CON COMANDOS VISTOS EN LA MATERIA
+     
+     -- Consultar registros insertados
+     
+     select * from Alumno;
+     
+     -- Consultar solo algunos datos
+     
+     select dni, apellido from Alumno;
+     
+     -- Consultar por un DNI especifico que traiga nombre y apellido
+     
+     select apellido, nombre from Docente where dni=32123321;
+     
+     -- Consultar docente que viva en la calle Ituzaingo con numero 1489
+     
+     select * from Docente where calle="Ituzaingo" and numero=1489;
+     
+     -- Consultar por registros con apellido "Traysse"
+     
+     select * from Docente where apellido="Traysse";
+     
+     -- Consultar Docente que viva en una calle o en otra
+     
+     select * from Docente where calle="Ituzaingo" or calle="Salta";
+     
+     -- Contar y agrupar
+     
+     select count(*) from Departamento group by idDepartamento;
+     
+     -- Consultar entre cantidades 
+     
+     select numero from Domicilio where (numero > 1000) and (numero < 3000);
+     
+     -- Consultar por Localidad que cuyo nombre empiece con la letra "L"
+     
+     select * from Localidad where nombre LIKE "l%";
+     
+     -- Consultar por Provincia cuya segunda palabra empiece con la letra "A"
+     
+     select * from Provincia where nombre LIKE "%a%";
+     
+	-- Consultar por nombre que empiece con "CA" y apellido que termine con "EZ"
+    
+    select * from Alumno where nombre LIKE "ca%" and apellido LIKE "%ez"; 
+    
+    -- Ordenar por orden alfabetico (de la A a la Z)
+    
+    select * from Materia order by nombre;
+    
+    -- Ordenar por orden alfabetico (de la Z a la A)
+    
+    select * from Carrera order by nombre desc;
+    
+    -- Consultar por el mayor
+    
+    select * from Inscripcion_a_cursada order by idComision desc limit 1;
+    
+    -- Consultar por el menor
+    
+    select * from Inscripcion_a_cursada order by idComision limit 1;
+    
+    -- Consultar el total de usuarios
+    
+    select count(usuario) AS total_de_usuarios from Inicio_de_sesion;
+    
+    -- Consultar la suma de los dni de los alumnos
+    
+    select SUM(dni) as suma_dni from Alumno;
+    
+    -- Consultar el promedio de dni de los docentes
+    
+    select AVG(dni) as promedio_dni from Docente;
+    
+    
+    -- CONSULTAS CON JOIN
+    
+    -- Mostrar que departamentos tienen la misma carrera
+    
+    select * from Departamento d 
+    INNER JOIN Carrera c 
+    on d.idCarrera = c.idCarrera;
+    
+	-- Mostrar que alumnos por apellido cursan la misma carrera por nombre 
+    
+    select Alumno.apellido, Carrera.nombre from Alumno a
+    INNER JOIN Carrera c
+    on a.idCarrera = c.idCarrera;
+    
+    -- Mostrar que Docentes tienen la misma materia, agrupados por idMateria
+    
+    select * from Docente d
+    INNER JOIN Materia m
+    on d.idMateria = m.idMateria
+    group by d.idMateria;
+    
+    -- Contar cuantas idCarreras tienen el mismo Departamento
+    
+    select * , count(Carrera.idDepartamento) as Total from Carrera c
+    INNER JOIN Departamento d 
+    on c.idDepartamento = d.idCarrera;
+    
+    -- Mostrar a partir de la tabla Alumno la carrera que cursa, las materias 
+    
+    select * from Alumno a
+    INNER JOIN Carrera c on a.idCarrera = c.idCarrera
+    INNER JOIN Materia m  on c.idCarrera = m.idCarrera;
+   
+    -- Otra forma de hacer el anterior
+    
+    select * from Alumno
+    join Carrera using(idAlumno)
+    join Materia using(idCarrera);
+    
+	-- Mostrar a partir de DOCENTE su domicilio, localidad y provincia. Agrupados por idDomicilio
+    
+    select * from Docente
+    join Domicilio using(idDocente)
+    join Localidad using(idDomicilio)
+    join Provincia using(idLocalidad)
+    group by idDomicilio;
+    
+    -- Buscar la Materia con más Docentes que la materia con id=6666
+    
+    select * from Materia m
+    INNER JOIN Inscripcion_A_Cursada i on m.idComision=i.idComision
+    INNER JOIN Docente d on i.idComision=d.idDocente
+    group by idMateria
+    having total > all (select count(idDocente) from Docente where idMateria = 6666);
+    
+	-- Buscar una Carrera con más Alumnos que la carrera id=1133
+
+	select * from Carrera c
+	INNER JOIN Alumno a on c.idAlumno=a.idAlumno
+	group by idCarrera
+	having total > any (select count(idAlumno) from Alumno where idCarrera=1133);
+    
+    -- Buscar la materia que se curse mas veces que la materia id=1010
+    
+    select * from Materia m
+    join Inscripcion_A_Cursada using(idMateria)
+    group by idMateria
+    having total > all (select count(idComision) from Inscripcion_A_Cursada where idMateria=1010);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
